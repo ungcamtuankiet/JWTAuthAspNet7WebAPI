@@ -132,5 +132,35 @@ namespace JWTAuthAspNet7WebAPI.Controllers
 
             return token;
         }
+
+        //Route -> make customer -> creator
+        [HttpPost]
+        [Route("make-creator")]
+        public async Task<IActionResult> MakeCreator([FromBody] UpdatePermissionDto updatePermissionDto)
+        {
+            var user = await _userManager.FindByNameAsync(updatePermissionDto.UserName);
+
+            if (user is null)
+                return BadRequest("Invalid User Name !!!!!!!!!");
+
+            await _userManager.AddToRoleAsync(user, StaticUserRoles.CREATOR);
+
+            return Ok("User is now an Creator");
+        }
+
+        //Route -> make customer -> admin
+        [HttpPost]
+        [Route("make-admin")]
+        public async Task<IActionResult> MakeAdmin([FromBody] UpdatePermissionDto updatePermissionDto)
+        {
+            var user = await _userManager.FindByNameAsync(updatePermissionDto.UserName);
+
+            if (user is null)
+                return BadRequest("Invalid User Name !!!!!!!!!");
+
+            await _userManager.AddToRoleAsync(user, StaticUserRoles.ADMIN);
+
+            return Ok("User is now an Admin");
+        }
     }
 }
