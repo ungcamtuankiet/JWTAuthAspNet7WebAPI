@@ -1,4 +1,5 @@
 using JWTAuthAspNet7WebAPI.Core.DBContext;
+using JWTAuthAspNet7WebAPI.Core.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 
 //Add Identity
 builder.Services
-    .AddIdentity<IdentityUser, IdentityRole>()
+    .AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDBContext>()
     .AddDefaultTokenProviders();
 
